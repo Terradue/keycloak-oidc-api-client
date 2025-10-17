@@ -25,5 +25,5 @@ jobs:
           python-version: 3.x
       - run: pip install mkdocs-material mkdocs-mermaid2-plugin mkdocs-jupyter legacy-cgi pdocs
       - run: pip install .
-      - run: pdocs as_markdown --output_dir ./docs/api/latest --exclude_source --overwrite keycloak-oidc-api-client
+      - run: pdocs as_markdown --output_dir ./docs/api/latest --exclude_source --overwrite keycloak_oidc_api_client
       - run: mkdocs gh-deploy --force
