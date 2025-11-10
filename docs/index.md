@@ -28,14 +28,15 @@ import webbrowser
 from keycloak_oidc_api_client.api.default.generate_user_code import sync as generate_user_code
 from keycloak_oidc_api_client.models.user_code_request import UserCodeRequest
 from keycloak_oidc_api_client.models.user_code_response import UserCodeResponse
+from keycloak_oidc_api_client.models.error import Error
 
 client_id: str = "my-client-id"
 default_realm: str = "my-realm"
 
-with Client(base_url=my_keycloak_base_url) as keykoack_client:
+with Client(base_url=my_keycloak_base_url) as keycloak_client:
     user_code_response: UserCodeResponse | Error | None = generate_user_code(
         realm=default_realm,
-        client=keykoack_client,
+        client=keycloak_client,
         body=UserCodeRequest(client_id=client_id, scope="my-scope my-other-scope"),
     )
 
@@ -46,23 +47,24 @@ with Client(base_url=my_keycloak_base_url) as keykoack_client:
 ### Obtain a device token
 
 ```python
-import loguru
+from loguru import logger
 import time
 
 from keycloak_oidc_api_client.api.default.request_token import sync as request_token
 from keycloak_oidc_api_client.models.request_token import RequestToken
 from keycloak_oidc_api_client.models.request_token_response import RequestTokenResponse
+from keycloak_oidc_api_client.models.error import Error
 
 request_token_response: RequestTokenResponse | Error | None = None
 
 if not request_token_response and isinstance(user_code_response, UserCodeResponse):
     start_time = time.time()
 
-    with Client(base_url=my_keycloak_base_url) as keykoack_client:
+    with Client(base_url=my_keycloak_base_url) as keycloak_client:
         while time.time() - start_time < user_code_response.expires_in:
             request_token_response = request_token(
                 realm=default_realm,
-                client=keykoack_client,
+                client=keycloak_client,
                 body=RequestToken(
                     client_id=client_id,
                     grant_type="urn:ietf:params:oauth:grant-type:device_code",
