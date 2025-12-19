@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 from collections.abc import Mapping
-from typing import Any, TypeVar, Union
+from typing import Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -15,24 +17,24 @@ class RequestTokenResponse:
     Attributes:
         access_token (str):
         refresh_token (str):
-        expires_in (Union[Unset, int]):
-        refresh_expires_in (Union[Unset, int]):
-        token_type (Union[Unset, str]):
-        id_token (Union[Unset, str]):
-        not_before_policy (Union[Unset, int]):
-        session_state (Union[Unset, str]):
-        scope (Union[Unset, str]):
+        expires_in (int | Unset):
+        refresh_expires_in (int | Unset):
+        token_type (str | Unset):
+        id_token (str | Unset):
+        not_before_policy (int | Unset):
+        session_state (str | Unset):
+        scope (str | Unset):
     """
 
     access_token: str
     refresh_token: str
-    expires_in: Union[Unset, int] = UNSET
-    refresh_expires_in: Union[Unset, int] = UNSET
-    token_type: Union[Unset, str] = UNSET
-    id_token: Union[Unset, str] = UNSET
-    not_before_policy: Union[Unset, int] = UNSET
-    session_state: Union[Unset, str] = UNSET
-    scope: Union[Unset, str] = UNSET
+    expires_in: int | Unset = UNSET
+    refresh_expires_in: int | Unset = UNSET
+    token_type: str | Unset = UNSET
+    id_token: str | Unset = UNSET
+    not_before_policy: int | Unset = UNSET
+    session_state: str | Unset = UNSET
+    scope: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:

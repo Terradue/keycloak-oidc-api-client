@@ -1,5 +1,5 @@
 from http import HTTPStatus
-from typing import Any, Optional, Union
+from typing import Any
 
 import httpx
 
@@ -32,8 +32,8 @@ def _get_kwargs(
 
 
 def _parse_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Optional[Union[Error, RequestTokenResponse]]:
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> Error | RequestTokenResponse | None:
     if response.status_code == 200:
         response_200 = RequestTokenResponse.from_dict(response.json())
 
@@ -56,8 +56,8 @@ def _parse_response(
 
 
 def _build_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Response[Union[Error, RequestTokenResponse]]:
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> Response[Error | RequestTokenResponse]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -69,9 +69,9 @@ def _build_response(
 def sync_detailed(
     realm: str,
     *,
-    client: Union[AuthenticatedClient, Client],
+    client: AuthenticatedClient | Client,
     body: RequestToken,
-) -> Response[Union[Error, RequestTokenResponse]]:
+) -> Response[Error | RequestTokenResponse]:
     """Request Token.
 
      Using the `/token` endpoint, poll for a token with the new device code grant type.
@@ -87,7 +87,7 @@ def sync_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Union[Error, RequestTokenResponse]]
+        Response[Error | RequestTokenResponse]
     """
 
     kwargs = _get_kwargs(
@@ -105,9 +105,9 @@ def sync_detailed(
 def sync(
     realm: str,
     *,
-    client: Union[AuthenticatedClient, Client],
+    client: AuthenticatedClient | Client,
     body: RequestToken,
-) -> Optional[Union[Error, RequestTokenResponse]]:
+) -> Error | RequestTokenResponse | None:
     """Request Token.
 
      Using the `/token` endpoint, poll for a token with the new device code grant type.
@@ -123,7 +123,7 @@ def sync(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Union[Error, RequestTokenResponse]
+        Error | RequestTokenResponse
     """
 
     return sync_detailed(
@@ -136,9 +136,9 @@ def sync(
 async def asyncio_detailed(
     realm: str,
     *,
-    client: Union[AuthenticatedClient, Client],
+    client: AuthenticatedClient | Client,
     body: RequestToken,
-) -> Response[Union[Error, RequestTokenResponse]]:
+) -> Response[Error | RequestTokenResponse]:
     """Request Token.
 
      Using the `/token` endpoint, poll for a token with the new device code grant type.
@@ -154,7 +154,7 @@ async def asyncio_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Union[Error, RequestTokenResponse]]
+        Response[Error | RequestTokenResponse]
     """
 
     kwargs = _get_kwargs(
@@ -170,9 +170,9 @@ async def asyncio_detailed(
 async def asyncio(
     realm: str,
     *,
-    client: Union[AuthenticatedClient, Client],
+    client: AuthenticatedClient | Client,
     body: RequestToken,
-) -> Optional[Union[Error, RequestTokenResponse]]:
+) -> Error | RequestTokenResponse | None:
     """Request Token.
 
      Using the `/token` endpoint, poll for a token with the new device code grant type.
@@ -188,7 +188,7 @@ async def asyncio(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Union[Error, RequestTokenResponse]
+        Error | RequestTokenResponse
     """
 
     return (

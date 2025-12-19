@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 from collections.abc import Mapping
-from typing import Any, TypeVar, Union
+from typing import Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -15,16 +17,22 @@ class RequestToken:
     Attributes:
         client_id (str):
         grant_type (str):
-        device_code (Union[Unset, str]):
-        client_secret (Union[Unset, str]):
-        refresh_token (Union[Unset, str]):
+        device_code (str | Unset):
+        client_secret (str | Unset):
+        refresh_token (str | Unset):
+        username (str | Unset):
+        password (str | Unset):
+        scope (str | Unset):
     """
 
     client_id: str
     grant_type: str
-    device_code: Union[Unset, str] = UNSET
-    client_secret: Union[Unset, str] = UNSET
-    refresh_token: Union[Unset, str] = UNSET
+    device_code: str | Unset = UNSET
+    client_secret: str | Unset = UNSET
+    refresh_token: str | Unset = UNSET
+    username: str | Unset = UNSET
+    password: str | Unset = UNSET
+    scope: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -37,6 +45,12 @@ class RequestToken:
         client_secret = self.client_secret
 
         refresh_token = self.refresh_token
+
+        username = self.username
+
+        password = self.password
+
+        scope = self.scope
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -52,6 +66,12 @@ class RequestToken:
             field_dict["client_secret"] = client_secret
         if refresh_token is not UNSET:
             field_dict["refresh_token"] = refresh_token
+        if username is not UNSET:
+            field_dict["username"] = username
+        if password is not UNSET:
+            field_dict["password"] = password
+        if scope is not UNSET:
+            field_dict["scope"] = scope
 
         return field_dict
 
@@ -68,12 +88,21 @@ class RequestToken:
 
         refresh_token = d.pop("refresh_token", UNSET)
 
+        username = d.pop("username", UNSET)
+
+        password = d.pop("password", UNSET)
+
+        scope = d.pop("scope", UNSET)
+
         request_token = cls(
             client_id=client_id,
             grant_type=grant_type,
             device_code=device_code,
             client_secret=client_secret,
             refresh_token=refresh_token,
+            username=username,
+            password=password,
+            scope=scope,
         )
 
         request_token.additional_properties = d

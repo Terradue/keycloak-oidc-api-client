@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar, Union, cast
+from typing import TYPE_CHECKING, Any, TypeVar, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -17,116 +19,116 @@ T = TypeVar("T", bound="WellKnown")
 class WellKnown:
     """
     Attributes:
-        issuer (Union[Unset, str]):
-        authorization_endpoint (Union[Unset, str]):
-        token_endpoint (Union[Unset, str]):
-        introspection_endpoint (Union[Unset, str]):
-        userinfo_endpoint (Union[Unset, str]):
-        end_session_endpoint (Union[Unset, str]):
-        frontchannel_logout_session_supported (Union[Unset, bool]):
-        frontchannel_logout_supported (Union[Unset, bool]):
-        jwks_uri (Union[Unset, str]):
-        check_session_iframe (Union[Unset, str]):
-        grant_types_supported (Union[Unset, list[str]]):
-        acr_values_supported (Union[Unset, list[str]]):
-        response_types_supported (Union[Unset, list[str]]):
-        subject_types_supported (Union[Unset, list[str]]):
-        id_token_signing_alg_values_supported (Union[Unset, list[str]]):
-        id_token_encryption_alg_values_supported (Union[Unset, list[str]]):
-        id_token_encryption_enc_values_supported (Union[Unset, list[str]]):
-        userinfo_signing_alg_values_supported (Union[Unset, list[str]]):
-        userinfo_encryption_alg_values_supported (Union[Unset, list[str]]):
-        userinfo_encryption_enc_values_supported (Union[Unset, list[str]]):
-        request_object_signing_alg_values_supported (Union[Unset, list[str]]):
-        request_object_encryption_alg_values_supported (Union[Unset, list[str]]):
-        request_object_encryption_enc_values_supported (Union[Unset, list[str]]):
-        response_modes_supported (Union[Unset, list[str]]):
-        registration_endpoint (Union[Unset, str]):
-        token_endpoint_auth_methods_supported (Union[Unset, list[str]]):
-        token_endpoint_auth_signing_alg_values_supported (Union[Unset, list[str]]):
-        introspection_endpoint_auth_methods_supported (Union[Unset, list[str]]):
-        introspection_endpoint_auth_signing_alg_values_supported (Union[Unset, list[str]]):
-        authorization_signing_alg_values_supported (Union[Unset, list[str]]):
-        authorization_encryption_alg_values_supported (Union[Unset, list[str]]):
-        authorization_encryption_enc_values_supported (Union[Unset, list[str]]):
-        claims_supported (Union[Unset, list[str]]):
-        claim_types_supported (Union[Unset, list[str]]):
-        claims_parameter_supported (Union[Unset, bool]):
-        scopes_supported (Union[Unset, list[str]]):
-        request_parameter_supported (Union[Unset, bool]):
-        request_uri_parameter_supported (Union[Unset, bool]):
-        require_request_uri_registration (Union[Unset, bool]):
-        code_challenge_methods_supported (Union[Unset, list[str]]):
-        tls_client_certificate_bound_access_tokens (Union[Unset, bool]):
-        revocation_endpoint (Union[Unset, str]):
-        revocation_endpoint_auth_methods_supported (Union[Unset, list[str]]):
-        revocation_endpoint_auth_signing_alg_values_supported (Union[Unset, list[str]]):
-        backchannel_logout_supported (Union[Unset, bool]):
-        backchannel_logout_session_supported (Union[Unset, bool]):
-        device_authorization_endpoint (Union[Unset, str]):
-        backchannel_token_delivery_modes_supported (Union[Unset, list[str]]):
-        backchannel_authentication_endpoint (Union[Unset, str]):
-        backchannel_authentication_request_signing_alg_values_supported (Union[Unset, list[str]]):
-        require_pushed_authorization_requests (Union[Unset, bool]):
-        pushed_authorization_request_endpoint (Union[Unset, str]):
-        mtls_endpoint_aliases (Union[Unset, MtlsEndpointAliases]):
-        authorization_response_iss_parameter_supported (Union[Unset, bool]):
+        issuer (str | Unset):
+        authorization_endpoint (str | Unset):
+        token_endpoint (str | Unset):
+        introspection_endpoint (str | Unset):
+        userinfo_endpoint (str | Unset):
+        end_session_endpoint (str | Unset):
+        frontchannel_logout_session_supported (bool | Unset):
+        frontchannel_logout_supported (bool | Unset):
+        jwks_uri (str | Unset):
+        check_session_iframe (str | Unset):
+        grant_types_supported (list[str] | Unset):
+        acr_values_supported (list[str] | Unset):
+        response_types_supported (list[str] | Unset):
+        subject_types_supported (list[str] | Unset):
+        id_token_signing_alg_values_supported (list[str] | Unset):
+        id_token_encryption_alg_values_supported (list[str] | Unset):
+        id_token_encryption_enc_values_supported (list[str] | Unset):
+        userinfo_signing_alg_values_supported (list[str] | Unset):
+        userinfo_encryption_alg_values_supported (list[str] | Unset):
+        userinfo_encryption_enc_values_supported (list[str] | Unset):
+        request_object_signing_alg_values_supported (list[str] | Unset):
+        request_object_encryption_alg_values_supported (list[str] | Unset):
+        request_object_encryption_enc_values_supported (list[str] | Unset):
+        response_modes_supported (list[str] | Unset):
+        registration_endpoint (str | Unset):
+        token_endpoint_auth_methods_supported (list[str] | Unset):
+        token_endpoint_auth_signing_alg_values_supported (list[str] | Unset):
+        introspection_endpoint_auth_methods_supported (list[str] | Unset):
+        introspection_endpoint_auth_signing_alg_values_supported (list[str] | Unset):
+        authorization_signing_alg_values_supported (list[str] | Unset):
+        authorization_encryption_alg_values_supported (list[str] | Unset):
+        authorization_encryption_enc_values_supported (list[str] | Unset):
+        claims_supported (list[str] | Unset):
+        claim_types_supported (list[str] | Unset):
+        claims_parameter_supported (bool | Unset):
+        scopes_supported (list[str] | Unset):
+        request_parameter_supported (bool | Unset):
+        request_uri_parameter_supported (bool | Unset):
+        require_request_uri_registration (bool | Unset):
+        code_challenge_methods_supported (list[str] | Unset):
+        tls_client_certificate_bound_access_tokens (bool | Unset):
+        revocation_endpoint (str | Unset):
+        revocation_endpoint_auth_methods_supported (list[str] | Unset):
+        revocation_endpoint_auth_signing_alg_values_supported (list[str] | Unset):
+        backchannel_logout_supported (bool | Unset):
+        backchannel_logout_session_supported (bool | Unset):
+        device_authorization_endpoint (str | Unset):
+        backchannel_token_delivery_modes_supported (list[str] | Unset):
+        backchannel_authentication_endpoint (str | Unset):
+        backchannel_authentication_request_signing_alg_values_supported (list[str] | Unset):
+        require_pushed_authorization_requests (bool | Unset):
+        pushed_authorization_request_endpoint (str | Unset):
+        mtls_endpoint_aliases (MtlsEndpointAliases | Unset):
+        authorization_response_iss_parameter_supported (bool | Unset):
     """
 
-    issuer: Union[Unset, str] = UNSET
-    authorization_endpoint: Union[Unset, str] = UNSET
-    token_endpoint: Union[Unset, str] = UNSET
-    introspection_endpoint: Union[Unset, str] = UNSET
-    userinfo_endpoint: Union[Unset, str] = UNSET
-    end_session_endpoint: Union[Unset, str] = UNSET
-    frontchannel_logout_session_supported: Union[Unset, bool] = UNSET
-    frontchannel_logout_supported: Union[Unset, bool] = UNSET
-    jwks_uri: Union[Unset, str] = UNSET
-    check_session_iframe: Union[Unset, str] = UNSET
-    grant_types_supported: Union[Unset, list[str]] = UNSET
-    acr_values_supported: Union[Unset, list[str]] = UNSET
-    response_types_supported: Union[Unset, list[str]] = UNSET
-    subject_types_supported: Union[Unset, list[str]] = UNSET
-    id_token_signing_alg_values_supported: Union[Unset, list[str]] = UNSET
-    id_token_encryption_alg_values_supported: Union[Unset, list[str]] = UNSET
-    id_token_encryption_enc_values_supported: Union[Unset, list[str]] = UNSET
-    userinfo_signing_alg_values_supported: Union[Unset, list[str]] = UNSET
-    userinfo_encryption_alg_values_supported: Union[Unset, list[str]] = UNSET
-    userinfo_encryption_enc_values_supported: Union[Unset, list[str]] = UNSET
-    request_object_signing_alg_values_supported: Union[Unset, list[str]] = UNSET
-    request_object_encryption_alg_values_supported: Union[Unset, list[str]] = UNSET
-    request_object_encryption_enc_values_supported: Union[Unset, list[str]] = UNSET
-    response_modes_supported: Union[Unset, list[str]] = UNSET
-    registration_endpoint: Union[Unset, str] = UNSET
-    token_endpoint_auth_methods_supported: Union[Unset, list[str]] = UNSET
-    token_endpoint_auth_signing_alg_values_supported: Union[Unset, list[str]] = UNSET
-    introspection_endpoint_auth_methods_supported: Union[Unset, list[str]] = UNSET
-    introspection_endpoint_auth_signing_alg_values_supported: Union[Unset, list[str]] = UNSET
-    authorization_signing_alg_values_supported: Union[Unset, list[str]] = UNSET
-    authorization_encryption_alg_values_supported: Union[Unset, list[str]] = UNSET
-    authorization_encryption_enc_values_supported: Union[Unset, list[str]] = UNSET
-    claims_supported: Union[Unset, list[str]] = UNSET
-    claim_types_supported: Union[Unset, list[str]] = UNSET
-    claims_parameter_supported: Union[Unset, bool] = UNSET
-    scopes_supported: Union[Unset, list[str]] = UNSET
-    request_parameter_supported: Union[Unset, bool] = UNSET
-    request_uri_parameter_supported: Union[Unset, bool] = UNSET
-    require_request_uri_registration: Union[Unset, bool] = UNSET
-    code_challenge_methods_supported: Union[Unset, list[str]] = UNSET
-    tls_client_certificate_bound_access_tokens: Union[Unset, bool] = UNSET
-    revocation_endpoint: Union[Unset, str] = UNSET
-    revocation_endpoint_auth_methods_supported: Union[Unset, list[str]] = UNSET
-    revocation_endpoint_auth_signing_alg_values_supported: Union[Unset, list[str]] = UNSET
-    backchannel_logout_supported: Union[Unset, bool] = UNSET
-    backchannel_logout_session_supported: Union[Unset, bool] = UNSET
-    device_authorization_endpoint: Union[Unset, str] = UNSET
-    backchannel_token_delivery_modes_supported: Union[Unset, list[str]] = UNSET
-    backchannel_authentication_endpoint: Union[Unset, str] = UNSET
-    backchannel_authentication_request_signing_alg_values_supported: Union[Unset, list[str]] = UNSET
-    require_pushed_authorization_requests: Union[Unset, bool] = UNSET
-    pushed_authorization_request_endpoint: Union[Unset, str] = UNSET
-    mtls_endpoint_aliases: Union[Unset, "MtlsEndpointAliases"] = UNSET
-    authorization_response_iss_parameter_supported: Union[Unset, bool] = UNSET
+    issuer: str | Unset = UNSET
+    authorization_endpoint: str | Unset = UNSET
+    token_endpoint: str | Unset = UNSET
+    introspection_endpoint: str | Unset = UNSET
+    userinfo_endpoint: str | Unset = UNSET
+    end_session_endpoint: str | Unset = UNSET
+    frontchannel_logout_session_supported: bool | Unset = UNSET
+    frontchannel_logout_supported: bool | Unset = UNSET
+    jwks_uri: str | Unset = UNSET
+    check_session_iframe: str | Unset = UNSET
+    grant_types_supported: list[str] | Unset = UNSET
+    acr_values_supported: list[str] | Unset = UNSET
+    response_types_supported: list[str] | Unset = UNSET
+    subject_types_supported: list[str] | Unset = UNSET
+    id_token_signing_alg_values_supported: list[str] | Unset = UNSET
+    id_token_encryption_alg_values_supported: list[str] | Unset = UNSET
+    id_token_encryption_enc_values_supported: list[str] | Unset = UNSET
+    userinfo_signing_alg_values_supported: list[str] | Unset = UNSET
+    userinfo_encryption_alg_values_supported: list[str] | Unset = UNSET
+    userinfo_encryption_enc_values_supported: list[str] | Unset = UNSET
+    request_object_signing_alg_values_supported: list[str] | Unset = UNSET
+    request_object_encryption_alg_values_supported: list[str] | Unset = UNSET
+    request_object_encryption_enc_values_supported: list[str] | Unset = UNSET
+    response_modes_supported: list[str] | Unset = UNSET
+    registration_endpoint: str | Unset = UNSET
+    token_endpoint_auth_methods_supported: list[str] | Unset = UNSET
+    token_endpoint_auth_signing_alg_values_supported: list[str] | Unset = UNSET
+    introspection_endpoint_auth_methods_supported: list[str] | Unset = UNSET
+    introspection_endpoint_auth_signing_alg_values_supported: list[str] | Unset = UNSET
+    authorization_signing_alg_values_supported: list[str] | Unset = UNSET
+    authorization_encryption_alg_values_supported: list[str] | Unset = UNSET
+    authorization_encryption_enc_values_supported: list[str] | Unset = UNSET
+    claims_supported: list[str] | Unset = UNSET
+    claim_types_supported: list[str] | Unset = UNSET
+    claims_parameter_supported: bool | Unset = UNSET
+    scopes_supported: list[str] | Unset = UNSET
+    request_parameter_supported: bool | Unset = UNSET
+    request_uri_parameter_supported: bool | Unset = UNSET
+    require_request_uri_registration: bool | Unset = UNSET
+    code_challenge_methods_supported: list[str] | Unset = UNSET
+    tls_client_certificate_bound_access_tokens: bool | Unset = UNSET
+    revocation_endpoint: str | Unset = UNSET
+    revocation_endpoint_auth_methods_supported: list[str] | Unset = UNSET
+    revocation_endpoint_auth_signing_alg_values_supported: list[str] | Unset = UNSET
+    backchannel_logout_supported: bool | Unset = UNSET
+    backchannel_logout_session_supported: bool | Unset = UNSET
+    device_authorization_endpoint: str | Unset = UNSET
+    backchannel_token_delivery_modes_supported: list[str] | Unset = UNSET
+    backchannel_authentication_endpoint: str | Unset = UNSET
+    backchannel_authentication_request_signing_alg_values_supported: list[str] | Unset = UNSET
+    require_pushed_authorization_requests: bool | Unset = UNSET
+    pushed_authorization_request_endpoint: str | Unset = UNSET
+    mtls_endpoint_aliases: MtlsEndpointAliases | Unset = UNSET
+    authorization_response_iss_parameter_supported: bool | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -150,105 +152,105 @@ class WellKnown:
 
         check_session_iframe = self.check_session_iframe
 
-        grant_types_supported: Union[Unset, list[str]] = UNSET
+        grant_types_supported: list[str] | Unset = UNSET
         if not isinstance(self.grant_types_supported, Unset):
             grant_types_supported = self.grant_types_supported
 
-        acr_values_supported: Union[Unset, list[str]] = UNSET
+        acr_values_supported: list[str] | Unset = UNSET
         if not isinstance(self.acr_values_supported, Unset):
             acr_values_supported = self.acr_values_supported
 
-        response_types_supported: Union[Unset, list[str]] = UNSET
+        response_types_supported: list[str] | Unset = UNSET
         if not isinstance(self.response_types_supported, Unset):
             response_types_supported = self.response_types_supported
 
-        subject_types_supported: Union[Unset, list[str]] = UNSET
+        subject_types_supported: list[str] | Unset = UNSET
         if not isinstance(self.subject_types_supported, Unset):
             subject_types_supported = self.subject_types_supported
 
-        id_token_signing_alg_values_supported: Union[Unset, list[str]] = UNSET
+        id_token_signing_alg_values_supported: list[str] | Unset = UNSET
         if not isinstance(self.id_token_signing_alg_values_supported, Unset):
             id_token_signing_alg_values_supported = self.id_token_signing_alg_values_supported
 
-        id_token_encryption_alg_values_supported: Union[Unset, list[str]] = UNSET
+        id_token_encryption_alg_values_supported: list[str] | Unset = UNSET
         if not isinstance(self.id_token_encryption_alg_values_supported, Unset):
             id_token_encryption_alg_values_supported = self.id_token_encryption_alg_values_supported
 
-        id_token_encryption_enc_values_supported: Union[Unset, list[str]] = UNSET
+        id_token_encryption_enc_values_supported: list[str] | Unset = UNSET
         if not isinstance(self.id_token_encryption_enc_values_supported, Unset):
             id_token_encryption_enc_values_supported = self.id_token_encryption_enc_values_supported
 
-        userinfo_signing_alg_values_supported: Union[Unset, list[str]] = UNSET
+        userinfo_signing_alg_values_supported: list[str] | Unset = UNSET
         if not isinstance(self.userinfo_signing_alg_values_supported, Unset):
             userinfo_signing_alg_values_supported = self.userinfo_signing_alg_values_supported
 
-        userinfo_encryption_alg_values_supported: Union[Unset, list[str]] = UNSET
+        userinfo_encryption_alg_values_supported: list[str] | Unset = UNSET
         if not isinstance(self.userinfo_encryption_alg_values_supported, Unset):
             userinfo_encryption_alg_values_supported = self.userinfo_encryption_alg_values_supported
 
-        userinfo_encryption_enc_values_supported: Union[Unset, list[str]] = UNSET
+        userinfo_encryption_enc_values_supported: list[str] | Unset = UNSET
         if not isinstance(self.userinfo_encryption_enc_values_supported, Unset):
             userinfo_encryption_enc_values_supported = self.userinfo_encryption_enc_values_supported
 
-        request_object_signing_alg_values_supported: Union[Unset, list[str]] = UNSET
+        request_object_signing_alg_values_supported: list[str] | Unset = UNSET
         if not isinstance(self.request_object_signing_alg_values_supported, Unset):
             request_object_signing_alg_values_supported = self.request_object_signing_alg_values_supported
 
-        request_object_encryption_alg_values_supported: Union[Unset, list[str]] = UNSET
+        request_object_encryption_alg_values_supported: list[str] | Unset = UNSET
         if not isinstance(self.request_object_encryption_alg_values_supported, Unset):
             request_object_encryption_alg_values_supported = self.request_object_encryption_alg_values_supported
 
-        request_object_encryption_enc_values_supported: Union[Unset, list[str]] = UNSET
+        request_object_encryption_enc_values_supported: list[str] | Unset = UNSET
         if not isinstance(self.request_object_encryption_enc_values_supported, Unset):
             request_object_encryption_enc_values_supported = self.request_object_encryption_enc_values_supported
 
-        response_modes_supported: Union[Unset, list[str]] = UNSET
+        response_modes_supported: list[str] | Unset = UNSET
         if not isinstance(self.response_modes_supported, Unset):
             response_modes_supported = self.response_modes_supported
 
         registration_endpoint = self.registration_endpoint
 
-        token_endpoint_auth_methods_supported: Union[Unset, list[str]] = UNSET
+        token_endpoint_auth_methods_supported: list[str] | Unset = UNSET
         if not isinstance(self.token_endpoint_auth_methods_supported, Unset):
             token_endpoint_auth_methods_supported = self.token_endpoint_auth_methods_supported
 
-        token_endpoint_auth_signing_alg_values_supported: Union[Unset, list[str]] = UNSET
+        token_endpoint_auth_signing_alg_values_supported: list[str] | Unset = UNSET
         if not isinstance(self.token_endpoint_auth_signing_alg_values_supported, Unset):
             token_endpoint_auth_signing_alg_values_supported = self.token_endpoint_auth_signing_alg_values_supported
 
-        introspection_endpoint_auth_methods_supported: Union[Unset, list[str]] = UNSET
+        introspection_endpoint_auth_methods_supported: list[str] | Unset = UNSET
         if not isinstance(self.introspection_endpoint_auth_methods_supported, Unset):
             introspection_endpoint_auth_methods_supported = self.introspection_endpoint_auth_methods_supported
 
-        introspection_endpoint_auth_signing_alg_values_supported: Union[Unset, list[str]] = UNSET
+        introspection_endpoint_auth_signing_alg_values_supported: list[str] | Unset = UNSET
         if not isinstance(self.introspection_endpoint_auth_signing_alg_values_supported, Unset):
             introspection_endpoint_auth_signing_alg_values_supported = (
                 self.introspection_endpoint_auth_signing_alg_values_supported
             )
 
-        authorization_signing_alg_values_supported: Union[Unset, list[str]] = UNSET
+        authorization_signing_alg_values_supported: list[str] | Unset = UNSET
         if not isinstance(self.authorization_signing_alg_values_supported, Unset):
             authorization_signing_alg_values_supported = self.authorization_signing_alg_values_supported
 
-        authorization_encryption_alg_values_supported: Union[Unset, list[str]] = UNSET
+        authorization_encryption_alg_values_supported: list[str] | Unset = UNSET
         if not isinstance(self.authorization_encryption_alg_values_supported, Unset):
             authorization_encryption_alg_values_supported = self.authorization_encryption_alg_values_supported
 
-        authorization_encryption_enc_values_supported: Union[Unset, list[str]] = UNSET
+        authorization_encryption_enc_values_supported: list[str] | Unset = UNSET
         if not isinstance(self.authorization_encryption_enc_values_supported, Unset):
             authorization_encryption_enc_values_supported = self.authorization_encryption_enc_values_supported
 
-        claims_supported: Union[Unset, list[str]] = UNSET
+        claims_supported: list[str] | Unset = UNSET
         if not isinstance(self.claims_supported, Unset):
             claims_supported = self.claims_supported
 
-        claim_types_supported: Union[Unset, list[str]] = UNSET
+        claim_types_supported: list[str] | Unset = UNSET
         if not isinstance(self.claim_types_supported, Unset):
             claim_types_supported = self.claim_types_supported
 
         claims_parameter_supported = self.claims_parameter_supported
 
-        scopes_supported: Union[Unset, list[str]] = UNSET
+        scopes_supported: list[str] | Unset = UNSET
         if not isinstance(self.scopes_supported, Unset):
             scopes_supported = self.scopes_supported
 
@@ -258,7 +260,7 @@ class WellKnown:
 
         require_request_uri_registration = self.require_request_uri_registration
 
-        code_challenge_methods_supported: Union[Unset, list[str]] = UNSET
+        code_challenge_methods_supported: list[str] | Unset = UNSET
         if not isinstance(self.code_challenge_methods_supported, Unset):
             code_challenge_methods_supported = self.code_challenge_methods_supported
 
@@ -266,11 +268,11 @@ class WellKnown:
 
         revocation_endpoint = self.revocation_endpoint
 
-        revocation_endpoint_auth_methods_supported: Union[Unset, list[str]] = UNSET
+        revocation_endpoint_auth_methods_supported: list[str] | Unset = UNSET
         if not isinstance(self.revocation_endpoint_auth_methods_supported, Unset):
             revocation_endpoint_auth_methods_supported = self.revocation_endpoint_auth_methods_supported
 
-        revocation_endpoint_auth_signing_alg_values_supported: Union[Unset, list[str]] = UNSET
+        revocation_endpoint_auth_signing_alg_values_supported: list[str] | Unset = UNSET
         if not isinstance(self.revocation_endpoint_auth_signing_alg_values_supported, Unset):
             revocation_endpoint_auth_signing_alg_values_supported = (
                 self.revocation_endpoint_auth_signing_alg_values_supported
@@ -282,13 +284,13 @@ class WellKnown:
 
         device_authorization_endpoint = self.device_authorization_endpoint
 
-        backchannel_token_delivery_modes_supported: Union[Unset, list[str]] = UNSET
+        backchannel_token_delivery_modes_supported: list[str] | Unset = UNSET
         if not isinstance(self.backchannel_token_delivery_modes_supported, Unset):
             backchannel_token_delivery_modes_supported = self.backchannel_token_delivery_modes_supported
 
         backchannel_authentication_endpoint = self.backchannel_authentication_endpoint
 
-        backchannel_authentication_request_signing_alg_values_supported: Union[Unset, list[str]] = UNSET
+        backchannel_authentication_request_signing_alg_values_supported: list[str] | Unset = UNSET
         if not isinstance(self.backchannel_authentication_request_signing_alg_values_supported, Unset):
             backchannel_authentication_request_signing_alg_values_supported = (
                 self.backchannel_authentication_request_signing_alg_values_supported
@@ -298,7 +300,7 @@ class WellKnown:
 
         pushed_authorization_request_endpoint = self.pushed_authorization_request_endpoint
 
-        mtls_endpoint_aliases: Union[Unset, dict[str, Any]] = UNSET
+        mtls_endpoint_aliases: dict[str, Any] | Unset = UNSET
         if not isinstance(self.mtls_endpoint_aliases, Unset):
             mtls_endpoint_aliases = self.mtls_endpoint_aliases.to_dict()
 
@@ -576,7 +578,7 @@ class WellKnown:
         pushed_authorization_request_endpoint = d.pop("pushed_authorization_request_endpoint", UNSET)
 
         _mtls_endpoint_aliases = d.pop("mtls_endpoint_aliases", UNSET)
-        mtls_endpoint_aliases: Union[Unset, MtlsEndpointAliases]
+        mtls_endpoint_aliases: MtlsEndpointAliases | Unset
         if isinstance(_mtls_endpoint_aliases, Unset):
             mtls_endpoint_aliases = UNSET
         else:

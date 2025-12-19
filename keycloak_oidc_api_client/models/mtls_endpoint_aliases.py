@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 from collections.abc import Mapping
-from typing import Any, TypeVar, Union
+from typing import Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -13,24 +15,24 @@ T = TypeVar("T", bound="MtlsEndpointAliases")
 class MtlsEndpointAliases:
     """
     Attributes:
-        token_endpoint (Union[Unset, str]):
-        revocation_endpoint (Union[Unset, str]):
-        introspection_endpoint (Union[Unset, str]):
-        device_authorization_endpoint (Union[Unset, str]):
-        registration_endpoint (Union[Unset, str]):
-        userinfo_endpoint (Union[Unset, str]):
-        pushed_authorization_request_endpoint (Union[Unset, str]):
-        backchannel_authentication_endpoint (Union[Unset, str]):
+        token_endpoint (str | Unset):
+        revocation_endpoint (str | Unset):
+        introspection_endpoint (str | Unset):
+        device_authorization_endpoint (str | Unset):
+        registration_endpoint (str | Unset):
+        userinfo_endpoint (str | Unset):
+        pushed_authorization_request_endpoint (str | Unset):
+        backchannel_authentication_endpoint (str | Unset):
     """
 
-    token_endpoint: Union[Unset, str] = UNSET
-    revocation_endpoint: Union[Unset, str] = UNSET
-    introspection_endpoint: Union[Unset, str] = UNSET
-    device_authorization_endpoint: Union[Unset, str] = UNSET
-    registration_endpoint: Union[Unset, str] = UNSET
-    userinfo_endpoint: Union[Unset, str] = UNSET
-    pushed_authorization_request_endpoint: Union[Unset, str] = UNSET
-    backchannel_authentication_endpoint: Union[Unset, str] = UNSET
+    token_endpoint: str | Unset = UNSET
+    revocation_endpoint: str | Unset = UNSET
+    introspection_endpoint: str | Unset = UNSET
+    device_authorization_endpoint: str | Unset = UNSET
+    registration_endpoint: str | Unset = UNSET
+    userinfo_endpoint: str | Unset = UNSET
+    pushed_authorization_request_endpoint: str | Unset = UNSET
+    backchannel_authentication_endpoint: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:

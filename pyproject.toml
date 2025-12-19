@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "keycloak-oidc-api-client"
-version = "1.0.0"
+version = "1.1.0"
 description = "A client library for accessing Keycloak OIDC API"
 authors = []
 readme = "README.md"

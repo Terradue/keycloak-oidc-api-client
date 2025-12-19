@@ -1,5 +1,5 @@
 from http import HTTPStatus
-from typing import Any, Optional, Union
+from typing import Any
 
 import httpx
 
@@ -32,8 +32,8 @@ def _get_kwargs(
 
 
 def _parse_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Optional[Union[Error, UserCodeResponse]]:
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> Error | UserCodeResponse | None:
     if response.status_code == 200:
         response_200 = UserCodeResponse.from_dict(response.json())
 
@@ -56,8 +56,8 @@ def _parse_response(
 
 
 def _build_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Response[Union[Error, UserCodeResponse]]:
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> Response[Error | UserCodeResponse]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -69,9 +69,9 @@ def _build_response(
 def sync_detailed(
     realm: str,
     *,
-    client: Union[AuthenticatedClient, Client],
+    client: AuthenticatedClient | Client,
     body: UserCodeRequest,
-) -> Response[Union[Error, UserCodeResponse]]:
+) -> Response[Error | UserCodeResponse]:
     """Generate a user code
 
      Generate a user code
@@ -85,7 +85,7 @@ def sync_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Union[Error, UserCodeResponse]]
+        Response[Error | UserCodeResponse]
     """
 
     kwargs = _get_kwargs(
@@ -103,9 +103,9 @@ def sync_detailed(
 def sync(
     realm: str,
     *,
-    client: Union[AuthenticatedClient, Client],
+    client: AuthenticatedClient | Client,
     body: UserCodeRequest,
-) -> Optional[Union[Error, UserCodeResponse]]:
+) -> Error | UserCodeResponse | None:
     """Generate a user code
 
      Generate a user code
@@ -119,7 +119,7 @@ def sync(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Union[Error, UserCodeResponse]
+        Error | UserCodeResponse
     """
 
     return sync_detailed(
@@ -132,9 +132,9 @@ def sync(
 async def asyncio_detailed(
     realm: str,
     *,
-    client: Union[AuthenticatedClient, Client],
+    client: AuthenticatedClient | Client,
     body: UserCodeRequest,
-) -> Response[Union[Error, UserCodeResponse]]:
+) -> Response[Error | UserCodeResponse]:
     """Generate a user code
 
      Generate a user code
@@ -148,7 +148,7 @@ async def asyncio_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Union[Error, UserCodeResponse]]
+        Response[Error | UserCodeResponse]
     """
 
     kwargs = _get_kwargs(
@@ -164,9 +164,9 @@ async def asyncio_detailed(
 async def asyncio(
     realm: str,
     *,
-    client: Union[AuthenticatedClient, Client],
+    client: AuthenticatedClient | Client,
     body: UserCodeRequest,
-) -> Optional[Union[Error, UserCodeResponse]]:
+) -> Error | UserCodeResponse | None:
     """Generate a user code
 
      Generate a user code
@@ -180,7 +180,7 @@ async def asyncio(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Union[Error, UserCodeResponse]
+        Error | UserCodeResponse
     """
 
     return (
