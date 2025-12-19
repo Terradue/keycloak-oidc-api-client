@@ -1,0 +1,457 @@
+# Copyright 2025 Terradue
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+openapi: 3.0.0
+
+info:
+  title: Keycloak OIDC API
+  description: A small subset of Keycloak APIs to handle OIDC protocol.
+  version: 1.0.0
+  contact:
+    name: Terradue Srl
+    url: https://www.terradue.com
+  license:
+    name: Creative Commons Attribution-ShareAlike 4.0 International
+    url: https://opensource.org/licenses/MIT
+
+paths:
+  /realms/{realm}/.well-known/openid-configuration:
+    get:
+      summary: Get the well_known object.
+      description: Lists endpoints and other relevant configuration options
+      operationId: getWellKnown
+      parameters:
+      - name: realm
+        description: The realm
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WellKnown'
+        '404':
+          description: Realm does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /realms/{realm}/protocol/openid-connect/auth/device:
+    post:
+      summary: Generate a user code
+      description: Generate a user code
+      operationId: generateUserCode
+      parameters:
+      - name: realm
+        description: The realm
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/UserCodeRequest"
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserCodeResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Realm does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /realms/{realm}/protocol/openid-connect/token:
+    post:
+      summary: Request Token.
+      description: |
+        Using the `/token` endpoint, poll for a token with the new device code grant type.
+        
+        The link with the previous step is done with the `device_code` returned previously:
+      operationId: requestToken
+      parameters:
+      - name: realm
+        description: The realm
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/RequestToken'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RequestTokenResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Realm does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+components:
+
+  schemas:
+
+    UserCodeRequest:
+      type: object
+      required:
+      - client_id
+      properties:
+        client_id:
+          type: string
+        client_secret:
+          type: string
+        scope:
+          type: string
+
+    UserCodeResponse:
+      type: object
+      additionalProperties: true
+      required:
+      - device_code
+      - user_code
+      - verification_uri
+      - verification_uri_complete
+      - expires_in
+      - interval
+      properties:
+        device_code:
+          description: a confidential code, where to poll the token
+          type: string
+        user_code:
+          description: an “authentication process id”
+          type: string
+        verification_uri:
+          description: where to redirect the user to the authentication process
+          type: string
+          format: uri
+        verification_uri_complete:
+          description: |
+            The same of `verification_uri`, with the `user_code` in URI. Encode this in a QRCode
+          type: string
+          format: uri
+        expires_in:
+          type: integer
+          format: int64
+        interval:
+          description: for polling
+          type: integer
+          format: int32
+
+    RequestToken:
+      type: object
+      additionalProperties: true
+      required:
+      - client_id
+      - grant_type
+      properties:
+        client_id:
+          type: string
+        device_code:
+          type: string
+        client_secret:
+          type: string
+        grant_type:
+          type: string
+        refresh_token:
+          type: string
+        username:
+          type: string
+        password:
+          type: string
+        scope:
+          type: string
+
+    RequestTokenResponse:
+      type: object
+      additionalProperties: true
+      required:
+      - access_token
+      - refresh_token
+      properties:
+        access_token:
+          type: string
+        expires_in:
+          type: integer
+          format: int64
+        refresh_expires_in:
+          type: integer
+          format: int64
+        refresh_token:
+          type: string
+        token_type:
+          type: string
+        id_token:
+          type: string
+        not-before-policy:
+          type: integer
+          format: int64
+        session_state:
+          type: string
+        scope:
+          type: string
+
+    Error:
+      type: object
+      additionalProperties: true
+      properties:
+        error:
+          type: string
+        error_description:
+          type: string
+
+    MtlsEndpointAliases:
+      type: object
+      additionalProperties: true
+      properties:
+        token_endpoint:
+          type: string
+          format: uri
+        revocation_endpoint:
+          type: string
+          format: uri
+        introspection_endpoint:
+          type: string
+          format: uri
+        device_authorization_endpoint: 
+          type: string
+          format: uri
+        registration_endpoint: 
+          type: string
+          format: uri
+        userinfo_endpoint: 
+          type: string
+          format: uri
+        pushed_authorization_request_endpoint: 
+          type: string
+          format: uri
+        backchannel_authentication_endpoint: 
+          type: string
+          format: uri
+
+    WellKnown:
+      type: object
+      additionalProperties: true
+      properties:
+        issuer: 
+          type: string
+          format: uri
+        authorization_endpoint: 
+          type: string
+          format: uri
+        token_endpoint: 
+          type: string
+          format: uri
+        introspection_endpoint: 
+          type: string
+          format: uri
+        userinfo_endpoint: 
+          type: string
+          format: uri
+        end_session_endpoint: 
+          type: string
+          format: uri
+        frontchannel_logout_session_supported: 
+          type: boolean
+        frontchannel_logout_supported: 
+          type: boolean
+        jwks_uri: 
+          type: string
+          format: uri
+        check_session_iframe: 
+          type: string
+          format: uri
+        grant_types_supported: 
+          type: array
+          items:
+            type: string
+        acr_values_supported: 
+          type: array
+          items:
+            type: string
+        response_types_supported: 
+          type: array
+          items:
+            type: string
+        subject_types_supported: 
+          type: array
+          items:
+            type: string
+        id_token_signing_alg_values_supported: 
+          type: array
+          items:
+            type: string
+        id_token_encryption_alg_values_supported: 
+          type: array
+          items:
+            type: string
+        id_token_encryption_enc_values_supported: 
+          type: array
+          items:
+            type: string
+        userinfo_signing_alg_values_supported: 
+          type: array
+          items:
+            type: string
+        userinfo_encryption_alg_values_supported: 
+          type: array
+          items:
+            type: string
+        userinfo_encryption_enc_values_supported: 
+          type: array
+          items:
+            type: string
+        request_object_signing_alg_values_supported: 
+          type: array
+          items:
+            type: string
+        request_object_encryption_alg_values_supported: 
+          type: array
+          items:
+            type: string
+        request_object_encryption_enc_values_supported: 
+          type: array
+          items:
+            type: string
+        response_modes_supported: 
+          type: array
+          items:
+            type: string
+        registration_endpoint:
+          type: string
+          format: uri
+        token_endpoint_auth_methods_supported: 
+          type: array
+          items:
+            type: string
+        token_endpoint_auth_signing_alg_values_supported: 
+          type: array
+          items:
+            type: string
+        introspection_endpoint_auth_methods_supported: 
+          type: array
+          items:
+            type: string
+        introspection_endpoint_auth_signing_alg_values_supported: 
+          type: array
+          items:
+            type: string
+        authorization_signing_alg_values_supported: 
+          type: array
+          items:
+            type: string
+        authorization_encryption_alg_values_supported: 
+          type: array
+          items:
+            type: string
+        authorization_encryption_enc_values_supported: 
+          type: array
+          items:
+            type: string
+        claims_supported: 
+          type: array
+          items:
+            type: string
+        claim_types_supported: 
+          type: array
+          items:
+            type: string
+        claims_parameter_supported:
+          type: boolean
+        scopes_supported: 
+          type: array
+          items:
+            type: string
+        request_parameter_supported:
+          type: boolean
+        request_uri_parameter_supported:
+          type: boolean
+        require_request_uri_registration:
+          type: boolean
+        code_challenge_methods_supported: 
+          type: array
+          items:
+            type: string
+        tls_client_certificate_bound_access_tokens:
+          type: boolean
+        revocation_endpoint:
+          type: string
+          format: uri
+        revocation_endpoint_auth_methods_supported: 
+          type: array
+          items:
+            type: string
+        revocation_endpoint_auth_signing_alg_values_supported: 
+          type: array
+          items:
+            type: string
+        backchannel_logout_supported:
+          type: boolean
+        backchannel_logout_session_supported:
+          type: boolean
+        device_authorization_endpoint:
+          type: string
+          format: uri
+        backchannel_token_delivery_modes_supported: 
+          type: array
+          items:
+            type: string
+        backchannel_authentication_endpoint:
+          type: string
+          format: uri
+        backchannel_authentication_request_signing_alg_values_supported: 
+          type: array
+          items:
+            type: string
+        require_pushed_authorization_requests:
+          type: boolean
+        pushed_authorization_request_endpoint:
+          type: string
+          format: uri
+        mtls_endpoint_aliases:
+          $ref: '#/components/schemas/MtlsEndpointAliases'
+        authorization_response_iss_parameter_supported:
+          type: boolean
