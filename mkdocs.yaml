@@ -12,11 +12,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-site_name: keycloack-oidc-api-client
-site_url: https://terradue.github.io/keycloack-oidc-api-client/
+site_name: keycloak-oidc-api-client
+site_url: https://terradue.github.io/keycloak-oidc-api-client/
 site_author: Fabrice Brito, Simone Tripodi
-repo_url: https://github.com/Terradue/keycloack-oidc-api-client/
-repo_name: Terradue/keycloack-oidc-api-client
+repo_url: https://github.com/Terradue/keycloak-oidc-api-client
+repo_name: Terradue/keycloak-oidc-api-client
 
 theme:
     logo: imgs/icon-eoap.png
@@ -77,6 +77,6 @@ extra_javascript:
 nav:
   - index.md
   - OpenAPI: ./openapi/keycloak_openapi.html
-  - API doc: ./api/latest/keycloack_oidc_api_client/index.md
+  - API doc: ./api/latest/keycloak_oidc_api_client/index.md
 
 copyright: <a href="https://www.apache.org/licenses/LICENSE-2.0"><img src="https://img.shields.io/badge/license-Apache%20License%202.0-blue"" alt="Apache License, Version 2.0" /></a>
